@@ -37,7 +37,7 @@ function CSVToJSON(csv) {
 /**
  * Returns a JSON string, representing an array of buses where each entry has four fields of type string: `bus_type`, `bus_num`, `bus_direction`, `bus_time`.
  * 
- * @param {number} stop_id -
+ * @param {string} stop_id -
  * - **2016**: Licėjus (Akropolio kryptimi); 
  * - **0710**: Licėjus (Žirmunų kryptimi); 
  * - **0804**: Pramogų arena. Kareivių g. (Žirmūnų kryptimi); 
