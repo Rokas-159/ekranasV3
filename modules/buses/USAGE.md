@@ -6,7 +6,7 @@ Usage instructions for parsing bus stop timetables.
 
 Returns a JSON string representing an array of buses.  
 Each entry has four fields:  
-- `bus_type`
+- `bus_type` (expressbus/bus/trol) <!-- TODO: add night bus(will do later today for obvious reasons) -->
 - `bus_num`
 - `bus_direction`
 - `bus_time` (time until the bus arrives in the format `"X min"`)
