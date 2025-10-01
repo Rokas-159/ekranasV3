@@ -14,24 +14,24 @@ const INDICES = [0, 1, 5, 3]
 
 function CSVToJSON(csv) {
 
-    var lines = csv.trim().split("\n");
-    var result = [];
+    var bus_lines = csv.trim().split("\n");
+    var json = [];
 
-    for(var i = 1; i < lines.length; i++){
+    for(var i = 1; i < bus_lines.length; i++){
 
-	    var obj = {};
-	    var currentline = lines[i].split(",");
+	    var bus = {};
+	    var current_line = bus_lines[i].split(",");
 
 	    for(var j = 0; j < HEADERS.length - 1; j++){
-		    obj[HEADERS[j]] = currentline[INDICES[j]];
+		    bus[HEADERS[j]] = current_line[INDICES[j]];
 	    }
 
-        obj[HEADERS.at(-1)] = `${getMinutesUntilBus(currentline[INDICES.at(-1)])} min`;
+        bus[HEADERS.at(-1)] = `${getMinutesUntilBus(current_line[INDICES.at(-1)])} min`;
 
-	    result.push(obj);
+	    json.push(bus);
     }
 
-    return JSON.stringify(result);
+    return json;
 }
 
 /**
@@ -52,8 +52,8 @@ function CSVToJSON(csv) {
  */
 async function getBusStopInfo(stop_id) {
 
-    const URL = `https://www.stops.lt/vilnius/departures2.php?stopid=${stop_id}`;
+    const url = `https://www.stops.lt/vilnius/departures2.php?stopid=${stop_id}`;
 
-    const response = await fetch(URL);
+    const response = await fetch(url);
     return CSVToJSON(await response.text());
 }
