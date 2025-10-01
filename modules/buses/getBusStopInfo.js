@@ -14,15 +14,15 @@ const INDICES = [0, 1, 5, 3]
 
 function CSVToJSON(csv) {
 
-    var bus_lines = csv.trim().split("\n");
-    var json = [];
+    let bus_lines = csv.trim().split("\n");
+    let json = [];
 
-    for(var i = 1; i < bus_lines.length; i++){
+    for(let i = 1; i < bus_lines.length; i++){
 
-	    var bus = {};
-	    var current_line = bus_lines[i].split(",");
+	    let bus = {};
+	    let current_line = bus_lines[i].split(",");
 
-	    for(var j = 0; j < HEADERS.length - 1; j++){
+	    for(let j = 0; j < HEADERS.length - 1; j++){
 		    bus[HEADERS[j]] = current_line[INDICES[j]];
 	    }
 
