@@ -1,0 +1,60 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+main {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: repeat(2, 50%);
+    grid-template-columns: repeat(4, 25%);
+}
+
+main > div {
+    height: 100%;
+}
+
+.top_header {
+    height: 20%;
+    font-size: 24px;
+}
+.bus_list {
+    height: 80%;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    column-count: 2;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 6.7px;
+}
+
+.bus_num {
+    background-color: black;
+    color: white;
+    width: 2em;
+    padding: 0.2em 0;
+    display: inline-block;
+    text-align: center;
+    border-radius: 0.5em;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.bus_num.type_bus {
+    background-color: #0073ac;
+}
+.bus_num.type_expressbus {
+    background-color: #037d08;
+}
+.bus_num.type_trol {
+    background-color: #df3032;
+}
+
+.bus_list > div {
+    max-width: 50%;
+}
