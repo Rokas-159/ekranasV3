@@ -56,5 +56,3 @@ async function getBusStopInfo(stop_id) {
     const response = await fetch(url);
     return CSVToJSON(await response.text());
 }
-
-console.log(await getBusStopInfo(2016))
