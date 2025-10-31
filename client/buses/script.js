@@ -3,10 +3,10 @@ const mainMain = document.querySelector("main");
 const stops = [
     {id: "2016", name: "Licėjus", dir: "Akropolio kryptimi"},
     {id: "0710", name: "Licėjus", dir: "Žirmunų kryptimi"},
-    {id: "0804", name: "Pramogų arena, Kareivių g.", dir: "Žirmūnų kryptimi"},
-    {id: "0802", name: "Pramogų arena, Kalvarijų g.", dir: "Santariškių kryptimi"},
-    {id: "0709", name: "Pramogų arena, Kalvarijų g.", dir: "Centro kryptimi"},
-    {id: "2015", name: "Pramogų arena, Kareivių g.", dir: "Ozo kryptimi"},
+    {id: "0804", name: "Pramogų arena", dir: "Žirmūnų kryptimi"},
+    {id: "0802", name: "Pramogų arena", dir: "Santariškių kryptimi"},
+    {id: "0709", name: "Pramogų arena", dir: "Centro kryptimi"},
+    {id: "2015", name: "Pramogų arena", dir: "Ozo kryptimi"},
     {id: "0708", name: "Tauragnų st.", dir: "Centro kryptimi"},
     {id: "0803", name: "Tauragnų st.", dir: "Santariškių kryptimi"}
 ];
