@@ -30,7 +30,7 @@ async function loadBuses(stopId){
     table.innerHTML = "";
     let counter = 0;
     response.forEach(bus => {
-        if(counter >= 10) return;
+        // if(counter >= 10) return;
         counter++;
 
         const busDiv = document.createElement("div");
