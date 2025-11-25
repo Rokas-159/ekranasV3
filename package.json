@@ -1,5 +1,27 @@
 {
   "dependencies": {
+    "dotenv": "17.2.3",
     "express": "^5.1.0"
-  }
+  },
+  "name": "ekranasv3",
+  "version": "1.0.0",
+  "description": "A screen displaying some useful information.",
+  "main": "./backend/app.js",
+  "scripts": {
+    "build": "npm install",
+    "start": "node .",
+    "all": "npm run build && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rokas-159/ekranasV3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Rokas-159/ekranasV3/issues"
+  },
+  "homepage": "https://github.com/Rokas-159/ekranasV3#readme"
 }

@@ -1,7 +1,12 @@
 import express from 'express';
-const app=express();
-import { request } from "https";
-const port=8080;
+import { request } from 'https';
+import dotenv from 'dotenv';
+
+dotenv.config();
+const PORT = process.env.PORT;
+
+// everything below is tbd
+
 let temperature = 69;
 function main(){
   getTemperature();
@@ -9,7 +14,7 @@ function main(){
 }
 
 app.listen(port,()=>{
-    console.log('live on port '+port);
+    console.log('Listening on port '+port);
 });
 
 function getTemperature(){
