@@ -1,49 +1,26 @@
 import express from 'express';
-import { request } from 'https';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { exit } from 'process';
 
-dotenv.config();
+dotenv.config({quiet: true});
 const PORT = process.env.PORT;
-
-// everything below is tbd
-
-let temperature = 69;
-function main(){
-  getTemperature();
-  setInterval(getTemperature,10*60000)
+if (typeof PORT === "undefined"){
+	console.error("Error: environment variable PORT is undefined.")
+	exit(1)
 }
 
-app.listen(port,()=>{
-    console.log('Listening on port '+port);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const HTML_FOLDER_PATH = path.join(__dirname, "../html");
+
+var app = express();
+
+app.listen(PORT, () => {
+    console.log('Listening on port ' + PORT);
 });
 
-function getTemperature(){
-  var url="https://api.open-meteo.com/v1/forecast?latitude=54.6892&longitude=25.2798&hourly=temperature_2m&timezone=auto&forecast_days=1";
-  var req = request(url,res=>{
-    res.on('data', (chunk) => {
-      let instant = new Date();
-      const obj = JSON.parse(chunk);
-      result = obj.hourly.temperature_2m[instant.getHours()];
-      console.log(result);
-      temperature = result;
-    });
-  });
-  req.on('error', (err) => {
-    console.log("Huston, we have ein problem.");
-  });
-
-  req.end();
-}
-
-app.get('/getWeather', (req, res) => { 
-    res.send(temperature); 
-}); 
-
-
-app.get('/test',(req,res)=>{
-    console.log('route /test')
-    var response=req.query;
-    console.log(response);
-    res.send(response);
+app.get('/file', (req, res) => { 
+    res.sendFile(path.join(HTML_FOLDER_PATH, "placeholder.html"));
 });
-main();
