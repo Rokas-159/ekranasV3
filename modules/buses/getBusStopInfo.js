@@ -24,27 +24,29 @@ function parseBus(line) {
     line = line.split(",");
     const bus = Object.fromEntries(Object.entries(busMap).map(([header, parseValue]) => [header, parseValue(line)]))
 
+    if (bus.bus_time[0] === '-') return null;
+
     return bus;
 }
 
 function CSVToJSON(csv) {
 
     let bus_lines = csv.trim().split("\n").slice(1,);
-    return bus_lines.map(parseBus);
+    return bus_lines.map(parseBus).filter(bus => bus !== null);
 }
 
 /**
  * Returns a JSON string, representing an array of buses where each entry has four fields of type string: `bus_type`, `bus_num`, `bus_direction`, `bus_time`.
  * 
- * @param {string} stop_id -
- * - **2016**: Licėjus (Akropolio kryptimi); 
- * - **0710**: Licėjus (Žirmunų kryptimi); 
- * - **0804**: Pramogų arena. Kareivių g. (Žirmūnų kryptimi); 
- * - **0802**: Pramogų arena, Kalvarijų g. (Santariškių kryptimi); 
- * - **0709**: Pramogų arena. Kalvarijų g. (Centro kryptimi); 
- * - **2015**: Pramogų arena. Kareivių g. (Ozo kryptimi); 
- * - **0708**: Tauragnų st. (Centro kryptimi); 
- * - **0803**: Tauragnų st. (Santariškių kryptimi); 
+ * @param {string} stop_id
+ * **2016**: Licėjus (Akropolio kryptimi);
+ * **0710**: Licėjus (Žirmunų kryptimi); 
+ * **0804**: Pramogų arena. Kareivių g. (Žirmūnų kryptimi); 
+ * **0802**: Pramogų arena, Kalvarijų g. (Santariškių kryptimi); 
+ * **0709**: Pramogų arena. Kalvarijų g. (Centro kryptimi); 
+ * **2015**: Pramogų arena. Kareivių g. (Ozo kryptimi); 
+ * **0708**: Tauragnų st. (Centro kryptimi); 
+ * **0803**: Tauragnų st. (Santariškių kryptimi); 
  * - Consult https://docs.google.com/spreadsheets/d/1FaRhmFvxCVLVhHCnEjrGq3l42fSa1R648fk2H3xqHuQ/pubhtml for every available `stop_id`
  * 
  * @returns {string}
