@@ -20,7 +20,7 @@ function collapseSpaces(str) {
  *
  * @returns {string}
  */
-async function getWeatherInfo (){
+export async function getWeatherInfo (){
     const url = "https://meteofor.lt/weather-vilnius-4230/"
     const response = await axios.get(url)
     const html = response.data
@@ -56,5 +56,3 @@ async function getWeatherInfo (){
 
     return JSON.stringify(result)
 }
-
-console.log(await getWeatherInfo())
