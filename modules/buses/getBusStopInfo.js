@@ -9,32 +9,29 @@ function getMinutesUntilBus(fetched_time) {
     return minutes_until_bus;
 }
 
-function getField(n) {
-    return line => line[n]
-}
-
-const busMap = {
-    bus_type: getField(0),
-    bus_num: getField(1),
-    bus_direction: getField(5),
-    bus_time: line => `${getMinutesUntilBus(line[3])} min`
-}
-
-function parseBus(line) {    
-    line = line.split(",");
-    const bus = Object.fromEntries(Object.entries(busMap).map(([header, parseValue]) => [header, parseValue(line)]))
-
-    if (bus.bus_time[0] === '-') return null;
-
-    return bus;
-}
-
 function CSVToJSON(csv) {
+    const HEADERS = ["bus_type", "bus_num", "bus_direction", "bus_time"]
+    const INDICES = [0, 1, 5, 3]
 
-    let bus_lines = csv.trim().split("\n").slice(1,);
-    return bus_lines.map(parseBus).filter(bus => bus !== null);
+    let bus_lines = csv.trim().split("\n");
+    let json = [];
+
+    for(let i = 1; i < bus_lines.length; i++){
+
+	    let bus = {};
+	    let current_line = bus_lines[i].split(",");
+
+	    for(let j = 0; j < HEADERS.length - 1; j++){
+		    bus[HEADERS[j]] = current_line[INDICES[j]];
+	    }
+
+        bus[HEADERS.at(-1)] = `${getMinutesUntilBus(current_line[INDICES.at(-1)])} min`;
+
+	    json.push(bus);
+    }
+
+    return json;
 }
-
 /**
  * Returns a JSON string, representing an array of buses where each entry has four fields of type string: `bus_type`, `bus_num`, `bus_direction`, `bus_time`.
  * 
@@ -51,7 +48,7 @@ function CSVToJSON(csv) {
  * 
  * @returns {string}
  */
-async function getBusStopInfo(stop_id) {
+export async function getBusStopInfo(stop_id) {
 
     const url = `https://www.stops.lt/vilnius/departures2.php?stopid=${stop_id}`;
 
