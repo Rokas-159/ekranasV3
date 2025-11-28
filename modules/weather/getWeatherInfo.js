@@ -2,10 +2,6 @@ function getHoursFromISO8601(datetime){
     return (`${datetime.slice(11,13)}:00`)
 }
 
-function collapseSpaces(str) {
-    return str.replace(/\s+/g, ' ')
-}
-
 /**
  * @param displayed_hours an array in the format `["XX:00", "YY:00", ...]` containing hours to gather the weather forecast for
  * 
