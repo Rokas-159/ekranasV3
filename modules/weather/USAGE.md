@@ -2,9 +2,9 @@
 Usage instructions for parsing weather forecasts.
 
 ### File: `/modules/weather/getWeatherInfo.js`
-### `async function getWeatherInfo(displayed_hours: Array<string>): string`
+### `async function getWeatherInfo(displayed_hours: Array<string>): Object`
 
-Returns a JSON string representing an object where each key is a time, 
+Returns a JSON object where each key is a time, 
 and each value is an object with four numerical fields:
 - `weather_code` (int): a weather code, according to WMO code table 4677 (https://www.nodc.noaa.gov/archive/arc0021/0002199/1.1/data/0-data/HTML/WMO-CODE/WMO4677.HTM)
 - `temperature` (int): the temperature at that time in degrees Celsius, signed only when negative
