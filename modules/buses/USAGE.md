@@ -2,10 +2,10 @@
 Usage instructions for parsing bus stop timetables.
 
 ### File: `/modules/buses/getBusStopInfo.js`
-### `async function getBusStopInfo(stop_id: string): string`
+### `async function getBusStopInfo(stop_ids: Array<string>): Object`
 
-Returns a JSON string representing an array of buses.  
-Each entry has four fields:  
+Returns a JSON object where each field is a stop id. The ids are mapped to their corresponding arrays of buses. 
+Each bus has four fields:
 - `bus_type` (expressbus/bus/trol)
 - `bus_num`
 - `bus_direction`
@@ -13,7 +13,7 @@ Each entry has four fields:
 
 #### Parameters
 
-- `stop_id` *(string)* — Bus stop identifier. Example values:  
+- `stop_ids` *(Array\<string\>)* — An array of bus stop identifiers to gather the timetables for. Example values:  
   - **2016**: Licėjus (Akropolio kryptimi)  
   - **0710**: Licėjus (Žirmunų kryptimi)  
   - **0804**: Pramogų arena, Kareivių g. (Žirmūnų kryptimi)  
@@ -23,4 +23,4 @@ Each entry has four fields:
   - **0708**: Tauragnų st. (Centro kryptimi)  
   - **0803**: Tauragnų st. (Santariškių kryptimi)  
 
-For a full list of available `stop_id`s, consult [this Google Spreadsheet](https://docs.google.com/spreadsheets/d/1FaRhmFvxCVLVhHCnEjrGq3l42fSa1R648fk2H3xqHuQ/pubhtml).
+For a full list of available `stop_ids`, consult [this Google Spreadsheet](https://docs.google.com/spreadsheets/d/1FaRhmFvxCVLVhHCnEjrGq3l42fSa1R648fk2H3xqHuQ/pubhtml).
