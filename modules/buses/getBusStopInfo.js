@@ -31,24 +31,29 @@ function CSVToJSON(csv) {
     return json 
 }
 /**
- * Returns a JSON string, representing an array of buses where each entry has four fields of type string: `bus_type`, `bus_num`, `bus_direction`, `bus_time`.
- * 
- * @param {string} stop_id
- * **2016**: Licėjus (Akropolio kryptimi);
- * **0710**: Licėjus (Žirmunų kryptimi); 
- * **0804**: Pramogų arena. Kareivių g. (Žirmūnų kryptimi); 
- * **0802**: Pramogų arena, Kalvarijų g. (Santariškių kryptimi); 
- * **0709**: Pramogų arena. Kalvarijų g. (Centro kryptimi); 
- * **2015**: Pramogų arena. Kareivių g. (Ozo kryptimi); 
- * **0708**: Tauragnų st. (Centro kryptimi); 
- * **0803**: Tauragnų st. (Santariškių kryptimi); 
+ * @param {Array<string>} stop_ids An array of bus stop identifiers to gather the timetables for. Example values:  
+ * - **2016**: Licėjus (Akropolio kryptimi);
+ * - **0710**: Licėjus (Žirmunų kryptimi); 
+ * - **0804**: Pramogų arena. Kareivių g. (Žirmūnų kryptimi); 
+ * - **0802**: Pramogų arena, Kalvarijų g. (Santariškių kryptimi); 
+ * - **0709**: Pramogų arena. Kalvarijų g. (Centro kryptimi); 
+ * - **2015**: Pramogų arena. Kareivių g. (Ozo kryptimi); 
+ * - **0708**: Tauragnų st. (Centro kryptimi); 
+ * - **0803**: Tauragnų st. (Santariškių kryptimi);
  * - Consult https://docs.google.com/spreadsheets/d/1FaRhmFvxCVLVhHCnEjrGq3l42fSa1R648fk2H3xqHuQ/pubhtml for every available `stop_id`
  * 
- * @returns {string}
+ * @returns {Object} A JSON object where each field is a stop id. The ids are mapped to their corresponding arrays of buses. Each bus has four fields of type string: `bus_type`, `bus_num`, `bus_direction`, `bus_time`.
  */
-export async function getBusStopInfo(stop_id) {
-    const url = `https://www.stops.lt/vilnius/departures2.php?stopid=${stop_id}` 
+export async function getBusStopInfo(stop_ids) {
+    let url = ""
+    let response = null
+    let result = {}
 
-    const response = await fetch(url) 
-    return CSVToJSON(await response.text()) 
+    for (const stop_id of stop_ids) {
+        url = `https://www.stops.lt/vilnius/departures2.php?stopid=${stop_id}`
+        response = await fetch(url)
+        result[stop_id] = CSVToJSON(await response.text()) 
+    }
+
+    return result
 }
