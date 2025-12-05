@@ -24,9 +24,9 @@ export async function getWeatherInfo(displayed_hours){
         if (displayed_hours.includes(hour)){
             result[hour] = {
                 weather_code: data.hourly.weather_code[i],
-                temperature: Math.round(data.hourly.temperature_2m[i]) || 0,
+                temperature: data.hourly.temperature_2m[i] || 0,
                 precipitation: data.hourly.precipitation[i],
-                wind_gusts: Math.round(data.hourly.wind_gusts_10m[i]),
+                wind_gusts: data.hourly.wind_gusts_10m[i]
             }
         }
     })
