@@ -9,10 +9,9 @@ function getMinutesUntilBus(fetched_time) {
     return minutes_until_bus;
 }
 
-const HEADERS = ["bus_type", "bus_num", "bus_direction", "bus_time"]
-const INDICES = [0, 1, 5, 3]
-
 function CSVToJSON(csv) {
+    const HEADERS = ["bus_type", "bus_num", "bus_direction", "bus_time"]
+    const INDICES = [0, 1, 5, 3]
 
     let bus_lines = csv.trim().split("\n");
     let json = [];
@@ -33,24 +32,23 @@ function CSVToJSON(csv) {
 
     return json;
 }
-
 /**
  * Returns a JSON string, representing an array of buses where each entry has four fields of type string: `bus_type`, `bus_num`, `bus_direction`, `bus_time`.
  * 
- * @param {string} stop_id -
- * - **2016**: Licėjus (Akropolio kryptimi); 
- * - **0710**: Licėjus (Žirmunų kryptimi); 
- * - **0804**: Pramogų arena. Kareivių g. (Žirmūnų kryptimi); 
- * - **0802**: Pramogų arena, Kalvarijų g. (Santariškių kryptimi); 
- * - **0709**: Pramogų arena. Kalvarijų g. (Centro kryptimi); 
- * - **2015**: Pramogų arena. Kareivių g. (Ozo kryptimi); 
- * - **0708**: Tauragnų st. (Centro kryptimi); 
- * - **0803**: Tauragnų st. (Santariškių kryptimi); 
+ * @param {string} stop_id
+ * **2016**: Licėjus (Akropolio kryptimi);
+ * **0710**: Licėjus (Žirmunų kryptimi); 
+ * **0804**: Pramogų arena. Kareivių g. (Žirmūnų kryptimi); 
+ * **0802**: Pramogų arena, Kalvarijų g. (Santariškių kryptimi); 
+ * **0709**: Pramogų arena. Kalvarijų g. (Centro kryptimi); 
+ * **2015**: Pramogų arena. Kareivių g. (Ozo kryptimi); 
+ * **0708**: Tauragnų st. (Centro kryptimi); 
+ * **0803**: Tauragnų st. (Santariškių kryptimi); 
  * - Consult https://docs.google.com/spreadsheets/d/1FaRhmFvxCVLVhHCnEjrGq3l42fSa1R648fk2H3xqHuQ/pubhtml for every available `stop_id`
  * 
  * @returns {string}
  */
-async function getBusStopInfo(stop_id) {
+export async function getBusStopInfo(stop_id) {
 
     const url = `https://www.stops.lt/vilnius/departures2.php?stopid=${stop_id}`;
 
