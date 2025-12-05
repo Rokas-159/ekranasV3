@@ -7,35 +7,38 @@ body {
 	font-family: 'Roboto', sans-serif;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 main {
     font-size: 28px;
     height: 100%;
     width: 100%;
     display: grid;
-    grid-template-rows: repeat(2, minmax(0, 1fr));
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-	gap: 8px;
-    padding: 8px;
-    box-sizing: border-box;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+	gap: 0.8vw;
+    padding: 0.8vw;
 	background-color: rgb(236, 236, 236);
 }
 
 main > div {
     height: 100%;
-	box-sizing: border-box;
-	border-radius: 10px;
-	box-shadow: 2px 2px 4px 1px rgba(1,1,1,0.5);
+	border-radius: 1vw;
+	box-shadow: 0.2vw 0.2vw 0.4vw 0.1vw rgba(1,1,1,0.5);
 	background-color: white;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .top_header {
-    height: 20%;
 	background-color: #0D293B;
 	color: white;
-	border-radius: 10px;
+	border-radius: 1vw;
 	padding: 5px;
 	text-align: center;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,13 +46,11 @@ main > div {
 }
 
 .bus_list {
-    height: 80%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-start;
-    box-sizing: border-box;
     gap: 12px;
 	padding: 12px;
     overflow: hidden;
