@@ -1,0 +1,2 @@
+admin:$2y$10$LfeohX3m76cTjsUKE7xrW.mhZchNVunTTDbEuAlzwoyz9SugBvBce
+user1:$2y$10$Wnrn9W33aUuVW9rnFxG//OQ3vWXPM7GiYBa9RkAaxmfFV8n794DW6test:$2y$10$jiHf0BjC/yVGglEsqvWxmeDp8D1JT610P4AueqXZ.lgvLgJbDZaNS
