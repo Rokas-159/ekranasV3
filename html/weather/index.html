@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Orai</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <main>
+            <div class="weather-header">
+                <div class="column1">
+                    <p>Jaučiama temperatūra: <span id="feel"></span></p>
+                    <p>Vėjas: <span id="wind"></span></p>
+                    <p>Vėjo gūsiai: <span id="wind-gusts"></span></p>
+                    <p>UV indeksas: <span id="UV"></span></p>
+                </div>
+                <div class="column2">
+                    <p><span id="city">Vilnius</span></p>
+                    <p><span id="temp"></span></p>
+                </div>
+                <img src="pic.png" class="main-icon">
+            </div>
+            <div class="weather-forecast" id="forecast">
+                
+            </div>
+        </main>
+        <script src="../../modules/weather/getWeatherInfo.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
