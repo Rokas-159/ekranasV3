@@ -30,32 +30,38 @@ function generateTables() {
     }
 }
 
+function setIcon(img, weatherCode){
+    const imageSource = `pics/icon_${weatherCode}.png`;
+    img.src = imageSource;
+    img.alt = `Nėra paveiksliuko su kodu ${weatherCode} :(`;
+}
 async function updateWeather() {
     const hourCount = 5;
     let hours = [new Date().getHours()];
-    while(hours.length < hourCount){
+    while(hours.length < hourCount+1){
         hours.push((hours[hours.length-1]+1)%24);
     }
     const hourDisplays = hours.map(hour => `${hour}:00`);
     const response = await getWeatherInfo(hourDisplays);
-    console.log(response);
-    for (let i = 0; i < hourCount; i++){
+    for (let i = 1; i < hourCount+1; i++){
         const currentObject = response[hourDisplays[i]];
 
-        const table = document.getElementById("slot_" + i);
+        const table = document.getElementById(`slot_${i-1}`);
 
         const time = table.querySelector("h2");
         time.textContent = i == 0 ? "Dabar" : `${hours[i]} h`;
 
+        const temperature = table.querySelector("p");
+        if(currentObject === undefined){
+            temperature.textContent = "Klaida!";
+            continue;
+        }
+        temperature.textContent = currentObject.temperature + "°C";
+
         const weatherCode = currentObject.weather_code;
-        const imageSource = `pics/icon_${weatherCode}.png`;
         const iconContainer = table.getElementsByClassName("icon-container")[0];
         const icon = iconContainer.getElementsByClassName("weather-icon")[0];
-        icon.src = imageSource;
-        icon.alt = `Nėra paveiksliuko su kodu ${weatherCode} :(`;
-
-        const temperature = table.querySelector("p");
-        temperature.textContent = currentObject.temperature + "°C";
+        setIcon(icon, weatherCode);
     }
 
     const objectNow = response[hourDisplays[0]];
@@ -63,6 +69,8 @@ async function updateWeather() {
     document.getElementById("wind").textContent = "NaN";
     document.getElementById("wind-gusts").textContent = objectNow.wind_gusts;
     document.getElementById("UV").textContent = "NaN";
+    document.getElementById("temp").textContent = objectNow.temperature;
+    setIcon(document.getElementById("main-icon"), objectNow.weather_code);
 }
 
 function main() {
