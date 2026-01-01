@@ -10,8 +10,8 @@ function getMinutesUntilBus(fetched_time) {
 }
 
 function CSVToJSON(csv) {
-    const HEADERS = ["bus_type", "bus_num", "bus_direction", "bus_time"]
-    const INDICES = [0, 1, 5, 3]
+    const HEADERS = ["bus_type", "bus_num", "bus_direction", "bus_time"];
+    const INDICES = [0, 1, 5, 3];
 
     let bus_lines = csv.trim().split("\n");
     let json = [];
@@ -48,7 +48,7 @@ function CSVToJSON(csv) {
  * 
  * @returns {string}
  */
-export async function getBusStopInfo(stop_id) {
+async function getBusStopInfo(stop_id) {
 
     const url = `https://www.stops.lt/vilnius/departures2.php?stopid=${stop_id}`;
 

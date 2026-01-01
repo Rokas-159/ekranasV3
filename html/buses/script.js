@@ -28,10 +28,10 @@ async function loadBuses(stopId){
     const response = await getBusStopInfo(stopId);
     const table = document.getElementById("table_" + stopId);
     table.innerHTML = "";
-    let counter = 0;
+    // let counter = 0;
     response.forEach(bus => {
         // if(counter >= 10) return;
-        counter++;
+        // counter++;
 
         const busDiv = document.createElement("div");
         busDiv.innerHTML = `<span class="bus_num type_${bus.bus_type}">${bus.bus_num}</span> ${bus.bus_time}`;

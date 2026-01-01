@@ -23,14 +23,19 @@ main {
     justify-content: flex-start;
     padding: 10px;
     gap: 10px;
+    height: 35vh;
 }
 
 .main-icon {
     align-self: flex-end;
     margin-left: auto;
+    object-fit: contain;
+    max-height: 100%;
+    max-width: 100%;
 }
 
 .weather-forecast {
+    min-height: 0;
     flex: 1;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -38,18 +43,29 @@ main {
 }
 
 .weather-forecast > div {
+    height: 100%;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
-
-.img-container {
+.icon-container {
     flex: 1;
+    min-height: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
-.img-container {
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
+.weather-icon {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+.time-heading {
+    text-align: center;
+    height: 10%;
+}
+.temperature-text {
+    text-align: center;
+    height: 10%;
 }
