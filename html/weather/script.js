@@ -42,7 +42,7 @@ async function updateWeather() {
         hours.push((hours[hours.length-1]+1)%24);
     }
     const hourDisplays = hours.map(hour => `${hour}:00`);
-    const response = await getWeatherInfo(hourDisplays);
+    const response = await fetch(`/api/weather?displayed_hours=${hourDisplays.join(",")}`).then(res => res.json());
     for (let i = 1; i < hourCount+1; i++){
         const currentObject = response[hourDisplays[i]];
 

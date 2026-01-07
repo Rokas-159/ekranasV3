@@ -25,7 +25,7 @@ function generateTables() {
     });
 }
 async function loadBuses(stopId){
-    const response = await getBusStopInfo(stopId);
+    const response = await fetch(`/api/buses/${stopId}`).then(res => res.json());
     const table = document.getElementById("table_" + stopId);
     table.innerHTML = "";
     // let counter = 0;

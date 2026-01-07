@@ -4,6 +4,9 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { exit } from 'process';
 
+const busInfo = await import('../modules/buses/getBusStopInfo.js');
+const weatherInfo = await import('../modules/weather/getWeatherInfo.js');
+
 dotenv.config({quiet: true});
 const PORT = process.env.PORT;
 if (typeof PORT === "undefined"){
@@ -21,6 +24,16 @@ app.listen(PORT, () => {
     console.log('Listening on port ' + PORT);
 });
 
-app.get('/file', (req, res) => { 
-    res.sendFile(path.join(HTML_FOLDER_PATH, "placeholder.html"));
+app.use(express.static(HTML_FOLDER_PATH));
+
+app.get('/api/buses/:stop_id', async (req, res) => {
+    const stop_id = req.params.stop_id;
+    const bus_data = await busInfo.getBusStopInfo(stop_id);
+    res.json(bus_data);
+});
+
+app.get('/api/weather', async (req, res) => {
+    const displayed_hours = req.query.displayed_hours.split(",");
+    const weather_data = await weatherInfo.getWeatherInfo(displayed_hours);
+    res.json(weather_data);
 });

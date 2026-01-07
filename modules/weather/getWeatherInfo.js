@@ -12,7 +12,7 @@ function getHoursFromISO8601(datetime){
  *   - `precipitation` (float): the amount of precipitation at that time, in millimeters
  *	 - `wind_gusts` (float): the speed of wind gusts at that time, in meters per second
  */
-async function getWeatherInfo(displayed_hours){
+export async function getWeatherInfo(displayed_hours){
     const url = "https://api.open-meteo.com/v1/forecast?latitude=54.709257&longitude=25.160923&hourly=temperature_2m,precipitation,weather_code,wind_gusts_10m&forecast_days=1&wind_speed_unit=ms"
     const response = await fetch(url)
     const data = await response.json()

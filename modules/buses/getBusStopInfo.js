@@ -48,7 +48,7 @@ function CSVToJSON(csv) {
  * 
  * @returns {string}
  */
-async function getBusStopInfo(stop_id) {
+export async function getBusStopInfo(stop_id) {
 
     const url = `https://www.stops.lt/vilnius/departures2.php?stopid=${stop_id}`;
 
