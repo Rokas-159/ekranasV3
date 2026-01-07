@@ -73,18 +73,10 @@ async function updateWeather() {
     setIcon(document.getElementById("main-icon"), objectNow.weather_code);
 }
 
-function updateTime() {
-    const now = new Date();
-    document.getElementById("time").textContent =
-        now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-}
-
 function main() {
     generateTables();
     updateWeather();
-    updateTime();
     setInterval(updateWeather, 1000*60);
-    setInterval(updateTime, 1000);
 }
 
 main();

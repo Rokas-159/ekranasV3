@@ -42,18 +42,9 @@ async function updateStops(){
     stops.forEach(stop => loadBuses(stop.id));
 }
 
-function updateTime() {
-    const now = new Date();
-    document.getElementById("time").textContent =
-        now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-}
-
-
 function main() {
     generateTables();
     updateStops();
-    updateTime();
-    setInterval(updateTime, 1000);
     setInterval(updateStops, 1000*5);
 }
 
