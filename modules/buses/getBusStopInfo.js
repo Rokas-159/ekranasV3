@@ -60,5 +60,3 @@ export async function getBusStopInfo(stop_ids) {
 
     return result
 }
-
-console.log(await getBusStopInfo(["0103", "0710"]))
