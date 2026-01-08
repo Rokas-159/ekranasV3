@@ -1,8 +1,11 @@
 .top-header {
     background: #0D293B;
-    padding: 0px 8px;
+    padding: 0px 10px;
     display: flex;
     align-items: center;
+    font-size: 24px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
 }
 
 #time {
@@ -12,7 +15,7 @@
 
 .nav-element {
     color: #fff;
-    padding: 6px 14px;
+    padding: 10px 14px;
     background-color: transparent;
     font-weight: bold;
 }
@@ -21,6 +24,10 @@
     display: flex;
     align-items: center;
     margin: auto;
+}
+
+.nav-container a {
+    text-decoration: none;
 }
 
 .nav-element.active {

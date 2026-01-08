@@ -15,7 +15,7 @@ function generateTables() {
         const table = document.createElement("div");
         const header = document.createElement("div");
         header.innerHTML = stop.name + "<br>" + stop.dir;
-        header.classList.add("top_header");
+        header.classList.add("bus_header");
         table.appendChild(header);
         const body = document.createElement("div");
         body.id = "table_" + stop.id;
