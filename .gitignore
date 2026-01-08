@@ -1,6 +1,3 @@
 .vscode/
 node_modules
 .env
-.gitignore
-./modules/buses/getBusStopInfo.js
-./modules/weather/getWeatherInfo.js
