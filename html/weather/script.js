@@ -7,20 +7,20 @@ function generateTables() {
         div.id = `slot_${i}`;
         const date = document.createElement("h2");
         date.classList.add("time-heading");
-        date.textContent = "Loading...";
+        date.textContent = "Kraunama...";
 
         const imageSource = "pics/icon.png";
         const icon = document.createElement("img");
         icon.classList.add("weather-icon");
         icon.src = imageSource;
-        icon.alt = "Loading...";
+        icon.alt = "Kraunama...";
         const iconContainer = document.createElement("div");
         iconContainer.classList.add("icon-container");
         iconContainer.appendChild(icon);
         // iconContainer.style.backgroundImage = `url(${imageSource})`;
 
         const temperature = document.createElement("p");
-        temperature.textContent = "Loading...";
+        temperature.textContent = "Kraunama...";
         temperature.classList.add("temperature-text");
 
         div.appendChild(date);
@@ -33,7 +33,7 @@ function generateTables() {
 function setIcon(img, weatherCode){
     const imageSource = `pics/icon_${weatherCode}.png`;
     img.src = imageSource;
-    img.alt = `An icon for weather code ${weatherCode} was not found`;
+    img.alt = `Paveikslėlis orų kodui ${weatherCode} nerastas`;
 }
 function setSlot(slot, currentObject, display){
     const time = slot.querySelector("h2");
@@ -41,7 +41,7 @@ function setSlot(slot, currentObject, display){
 
     const temperature = slot.querySelector("p");
     if(currentObject === undefined){
-        temperature.textContent = "Error";
+        temperature.textContent = "Įvyko klaida";
         return;
     }
     if(typeof currentObject.temperature === "undefined"){
