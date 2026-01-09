@@ -33,7 +33,7 @@ function generateTables() {
 function setIcon(img, weatherCode){
     const imageSource = `pics/icon_${weatherCode}.png`;
     img.src = imageSource;
-    img.alt = `Nėra paveiksliuko su kodu ${weatherCode} :(`;
+    img.alt = `An icon for weather code ${weatherCode} was not found`;
 }
 function setSlot(slot, currentObject, display){
     const time = slot.querySelector("h2");
@@ -41,7 +41,7 @@ function setSlot(slot, currentObject, display){
 
     const temperature = slot.querySelector("p");
     if(currentObject === undefined){
-        temperature.textContent = "Klaida!";
+        temperature.textContent = "Error";
         return;
     }
     if(typeof currentObject.temperature === "undefined"){
@@ -63,17 +63,18 @@ async function updateWeather() {
     const hours = [d.getHours()];
     const weekday = ((d.getDay() - 1) + 7) % 7;
     while(hours.length < hourCount+1){
-        hours.push((hours[hours.length-1]+1)%24);
+        hours.push(hours[hours.length-1]+1);
     }
-    const hourDisplays = hours.map(hour => `${hour}:00`);
-    const response = await fetch(`/api/weather?displayed_hours=${hourDisplays.join(",")}&days_ahead=${dayCount}`).then(res => res.json());
-    for (let i = 1; i < hourCount+1; i++){
-        const currentObject = response.today[hourDisplays[i]];
+    const hourDisplays = hours.map(hour => `${hour % 24}:00`);
+    const response = await fetch(`/api/weather?displayed_hours=${hours.join(",")}&days_after_today=${dayCount}`).then(res => res.json());
+    const hourly_forecasts = {...response.today, ...response.tomorrow}
+    for (let i = 1; i <= hourCount; i++){
+        const currentObject = hourly_forecasts[hourDisplays[i]];
         const table = document.getElementById(`slot_${i-1}`);
-        setSlot(table, currentObject, `${hours[i]} h`);        
+        setSlot(table, currentObject, `${hourDisplays[i]}`);        
     }
 
-    const objectNow = response.today[hourDisplays[0]];
+    const objectNow = hourly_forecasts[hourDisplays[0]];
     document.getElementById("feel").textContent = "NaN";
     document.getElementById("wind").textContent = "NaN";
     document.getElementById("wind-gusts").textContent = objectNow.wind_gusts;
@@ -83,7 +84,7 @@ async function updateWeather() {
 
     for (let i = hourCount; i < hourCount+dayCount; i++){
         let dayOffset = i - hourCount + 1;
-        const currentObject = response.days_ahead[dayOffset-1];
+        const currentObject = response.days_after_today[dayOffset-1];
         const table = document.getElementById(`slot_${i}`);
         setSlot(table, currentObject, `${dayNames[(weekday+dayOffset)%7]}`);        
     }
