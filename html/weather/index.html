@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Orai</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="../header.css">
+    </head>
+    <body>
+        <header class="top-header">
+            <div id="time">--:--</div>
+            <div class="nav-container">
+                <a href="../buses/"><div class="nav-element">Autobusai</div></a>
+                <a href="../weather/"><div class="nav-element active">Orai</div></a>
+            </div>
+        </header>
+        <main>
+            <div class="weather-header" id="header">
+                <div class="column1">
+                    <p>Jaučiama temperatūra: <span id="feel"></span>°C</p>
+                    <p>Vėjas: <span id="wind"></span> m/s</p>
+                    <p>Vėjo gūsiai: <span id="wind-gusts"></span> m/s</p>
+                    <p>UV indeksas: <span id="UV"></span></p>
+                </div>
+                <div class="column2">
+                    <p><span id="city">Vilnius</span></p>
+                    <p><span id="temp"></span>°C</p>
+                </div>
+                <img src="pics/icon.png" class="main-icon" id="main-icon">
+            </div>
+            <div class="weather-forecast" id="forecast"></div>
+        </main>
+        <script src="script.js"></script>
+        <script src="../header.js"></script>
+    </body>
+</html>

@@ -9,8 +9,8 @@ function getMinutesUntilBus(fetched_time) {
 }
 
 function CSVToJSON(csv) {
-    const HEADERS = ["bus_type", "bus_num", "bus_direction", "bus_time"]
-    const INDICES = [0, 1, 5, 3]
+    const HEADERS = ["bus_type", "bus_num", "bus_direction", "bus_time"];
+    const INDICES = [0, 1, 5, 3];
 
     let bus_lines = csv.trim().split("\n") 
     let json = [] 

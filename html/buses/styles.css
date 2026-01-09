@@ -1,0 +1,88 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+	font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+main {
+    font-size: 28px;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+	gap: 0.8vw;
+    padding: 0.8vw;
+	background-color: rgb(236, 236, 236);
+}
+
+main > div {
+    height: 100%;
+	border-radius: 1vw;
+	box-shadow: 0.2vw 0.2vw 0.4vw 0.1vw rgba(1,1,1,0.5);
+	background-color: white;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.bus_header {
+	background-color: #0D293B;
+	color: white;
+	border-radius: 1vw;
+	padding: 5px;
+	text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.bus_list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 12px;
+	padding: 12px;
+    overflow: hidden;
+}
+
+.bus_num {
+    background-color: black;
+    color: white;
+    width: 2em;
+    padding: 0.2em 0;
+    display: inline-block;
+    text-align: center;
+    border-radius: 0.5em;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.bus_num.type_bus {
+    background-color: #0073ac;
+}
+.bus_num.type_expressbus {
+    background-color: #037d08;
+}
+.bus_num.type_trol {
+    background-color: #df3032;
+}
+
+.bus_list > div {
+    white-space: nowrap;
+    overflow: hidden;
+    width: calc(50% - 5px);
+}
