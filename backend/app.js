@@ -34,8 +34,8 @@ app.get('/api/buses', async (req, res) => {
 });
 
 app.get('/api/weather', async (req, res) => {
-    const displayed_hours = req.query.displayed_hours.split(",");
-    const days_ahead = req.query.days_ahead;
-    const weather_data = await weatherInfo.getWeatherInfo(displayed_hours, days_ahead);
+    const displayed_hours = req.query.displayed_hours.split(",").map((str) => Number(str));
+    const days_after_today = req.query.days_after_today;
+    const weather_data = await weatherInfo.getWeatherInfo(displayed_hours, days_after_today);
     res.json(weather_data);
 });
