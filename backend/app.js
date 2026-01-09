@@ -26,9 +26,10 @@ app.listen(PORT, () => {
 
 app.use(express.static(HTML_FOLDER_PATH));
 
-app.get('/api/buses/:stop_id', async (req, res) => {
-    const stop_id = req.params.stop_id;
-    const bus_data = await busInfo.getBusStopInfo(stop_id);
+app.get('/api/buses', async (req, res) => {
+    // syntax: /api/buses?stop_ids=0000,1111,2222
+    const stop_ids = req.query.stop_ids.split(",");
+    const bus_data = await busInfo.getBusStopInfo(stop_ids);
     res.json(bus_data);
 });
 
