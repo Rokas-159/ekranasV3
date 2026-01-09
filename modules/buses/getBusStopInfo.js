@@ -23,9 +23,12 @@ function CSVToJSON(csv) {
 		    bus[HEADERS[j]] = current_line[INDICES[j]] 
 	    }
 
-        bus[HEADERS.at(-1)] = `${getMinutesUntilBus(current_line[INDICES.at(-1)])} min` 
+        let min_until_bus = getMinutesUntilBus(current_line[INDICES.at(-1)])
 
-	    json.push(bus) 
+        if (min_until_bus >= 0) {
+            bus[HEADERS.at(-1)] = `${min_until_bus} min`
+            json.push(bus) 
+        }
     }
 
     return json 
