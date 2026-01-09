@@ -35,42 +35,58 @@ function setIcon(img, weatherCode){
     img.src = imageSource;
     img.alt = `Nėra paveiksliuko su kodu ${weatherCode} :(`;
 }
+function setSlot(slot, currentObject, display){
+    const time = slot.querySelector("h2");
+    time.textContent = display;
+
+    const temperature = slot.querySelector("p");
+    if(currentObject === undefined){
+        temperature.textContent = "Klaida!";
+        return;
+    }
+    if(typeof currentObject.temperature === "undefined"){
+        temperature.textContent = currentObject.temperature_min + "°C — "  + currentObject.temperature_max + "°C";
+    }else{
+        temperature.textContent = currentObject.temperature + "°C";
+    }
+
+    const weatherCode = currentObject.weather_code;
+    const iconContainer = slot.getElementsByClassName("icon-container")[0];
+    const icon = iconContainer.getElementsByClassName("weather-icon")[0];
+    setIcon(icon, weatherCode);
+}
 async function updateWeather() {
     const hourCount = 5;
-    let hours = [new Date().getHours()];
+    const dayCount = 5;
+    const dayNames = ["Pirmadienis", "Antradienis", "Trečiadienis", "Ketvirtadienis", "Penktadienis", "Šeštadienis", "Sekmadienis"];
+    const d = new Date();
+    const hours = [d.getHours()];
+    const weekday = ((d.getDay() - 1) + 7) % 7;
     while(hours.length < hourCount+1){
         hours.push((hours[hours.length-1]+1)%24);
     }
     const hourDisplays = hours.map(hour => `${hour}:00`);
-    const response = await fetch(`/api/weather?displayed_hours=${hourDisplays.join(",")}`).then(res => res.json());
+    const response = await fetch(`/api/weather?displayed_hours=${hourDisplays.join(",")}&days_ahead=${dayCount}`).then(res => res.json());
     for (let i = 1; i < hourCount+1; i++){
-        const currentObject = response[hourDisplays[i]];
-
+        const currentObject = response.today[hourDisplays[i]];
         const table = document.getElementById(`slot_${i-1}`);
-
-        const time = table.querySelector("h2");
-        time.textContent = i == 0 ? "Dabar" : `${hours[i]} h`;
-
-        const temperature = table.querySelector("p");
-        if(currentObject === undefined){
-            temperature.textContent = "Klaida!";
-            continue;
-        }
-        temperature.textContent = currentObject.temperature + "°C";
-
-        const weatherCode = currentObject.weather_code;
-        const iconContainer = table.getElementsByClassName("icon-container")[0];
-        const icon = iconContainer.getElementsByClassName("weather-icon")[0];
-        setIcon(icon, weatherCode);
+        setSlot(table, currentObject, `${hours[i]} h`);        
     }
 
-    const objectNow = response[hourDisplays[0]];
+    const objectNow = response.today[hourDisplays[0]];
     document.getElementById("feel").textContent = "NaN";
     document.getElementById("wind").textContent = "NaN";
     document.getElementById("wind-gusts").textContent = objectNow.wind_gusts;
     document.getElementById("UV").textContent = "NaN";
     document.getElementById("temp").textContent = objectNow.temperature;
     setIcon(document.getElementById("main-icon"), objectNow.weather_code);
+
+    for (let i = hourCount; i < hourCount+dayCount; i++){
+        let dayOffset = i - hourCount + 1;
+        const currentObject = response.days_ahead[dayOffset-1];
+        const table = document.getElementById(`slot_${i}`);
+        setSlot(table, currentObject, `${dayNames[(weekday+dayOffset)%7]}`);        
+    }
 }
 
 function main() {
